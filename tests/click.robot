@@ -22,7 +22,10 @@ Deve abrir a tela principal
     Wait Until Element Is Visible    ${hamburger}
     Click Element                    ${hamburger}
 
-    ${menu_item}    Set Variable    //*[@resource-id="com.qaxperience.yodapp:id/rvNavigation"]//*[@text="Clique em Botões"]
+    ${menu_item}    Set Variable     xpath=//*[@resource-id="com.qaxperience.yodapp:id/rvNavigation"]//*[@text="Clique em Botões"]
+
+    Wait Until Element Is Visible    ${menu_item}
+    Click Element                    ${menu_item}
 
     sleep                           5
 
