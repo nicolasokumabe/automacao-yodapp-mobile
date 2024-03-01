@@ -26,6 +26,10 @@ Deve abrir a tela principal
 
     Wait Until Element Is Visible    ${menu_item}
     Click Element                    ${menu_item}
+  
+    Wait Until Page Contains        Clique simples    5
+    Click Element                   xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView
+    Wait Until Page Contains        Botão clique simples
 
     sleep                           5
 
