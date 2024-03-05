@@ -20,7 +20,7 @@ Deve logar com sucesso
 
     Close session
 
-Não deve logar com senha incorreta
+Nao deve logar com senha incorreta
 
     Start session
     Get started
