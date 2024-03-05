@@ -1,8 +1,6 @@
 *** Settings ***
-Library        AppiumLibrary
 
-*** Variables ***
-${START}        QAX
+Resource        ../resources/base.resource
 
 *** Test Cases ***
 Deve realizar um clique simples
@@ -17,37 +15,19 @@ Deve realizar um clique simples
 
     Close session
 
-*** Keywords ***
-Start session
-    Open Application    http://localhost:4723
-    ...                 platformName=Android
-    ...                 deviceName=Android Emulator
-    ...                 automationName=UIAutomator2
-    ...                 app=${EXECDIR}/app/yodapp-beta.apk
-    ...                 udid=emulator-5554
-    ...                 autoGrantPermissions=true
+Deve realizar um clique longo
+    [Tags]    long
 
-Get started
-    Wait Until Page Contains         ${START}    5
-    Click Element                    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextSwitcher/android.widget.Button
-
-Navigate to
-    [Arguments]        ${item_text}
-    ${hamburger}    Set Variable     xpath=//android.widget.ImageButton[@content-desc="Open navigation drawer"]
-
-    Wait Until Element Is Visible    ${hamburger}
-    Click Element                    ${hamburger}
-
-    ${menu_item}    Set Variable     xpath=//*[@resource-id="com.qaxperience.yodapp:id/rvNavigation"]//*[@text="${item_text}"]
-
-    Wait Until Element Is Visible    ${menu_item}
-    Click Element                    ${menu_item}
+    Start session
+    Get started
+    Navigate to   Clique em Botões
+    Go to item    Clique longo    Botão clique longo    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.TextView
     
-Go to item
-    [Arguments]        ${item}    ${checkpoint}    ${xpath_click}
-    Wait Until Page Contains        ${item}    5
-    Click Element                   ${xpath_click}
-    Wait Until Page Contains        ${checkpoint}
-    
-Close session
-    Close Application
+    ${locator}   Set Variable    id=com.qaxperience.yodapp:id/long_click
+
+    ${positions}    Get Element Location          ${locator}
+
+    Tap With Positions    1000    ${${positions}[x], ${positions}[y]}
+    Wait Until Page Contains        Isso é um clique longo
+
+    Close session
